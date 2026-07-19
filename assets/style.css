@@ -1,0 +1,171 @@
+:root {
+  --bg: #ffffff;
+  --bg-raised: #f7f7f5;
+  --text: #191919;
+  --text-dim: #6b6b6b;
+  --accent: #2f5fce;
+  --border: #e3e3e0;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent);
+  transition: opacity 0.15s ease;
+}
+
+a:hover { opacity: 0.7; }
+
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem 5rem;
+}
+
+h2[id], h3[id] {
+  scroll-margin-top: 2rem;
+}
+
+.toc {
+  position: fixed;
+  top: 6rem;
+  left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.toc-title {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+
+.toc a {
+  color: var(--text-dim);
+  text-decoration: none;
+}
+
+.toc a:hover {
+  color: var(--accent);
+  opacity: 1;
+}
+
+@media (max-width: 1200px) {
+  .toc { display: none; }
+}
+
+.hero { padding-bottom: 1rem; }
+
+.logo {
+  height: 28px;
+  width: auto;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 2.75rem;
+  font-weight: 800;
+  margin: 0 0 1.5rem;
+}
+
+h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.lede {
+  font-size: 1.05rem;
+  color: var(--text);
+  margin: 0 0 2rem;
+}
+
+.apply-link {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.apply-link:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.deadline {
+  font-style: italic;
+  color: var(--text-dim);
+  margin-top: 0.5rem;
+}
+
+.block {
+  margin-top: 3rem;
+}
+
+.block p { color: var(--text); }
+
+.block ul {
+  padding-left: 1.25rem;
+}
+
+.faqs details {
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 0;
+}
+
+.faqs summary {
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.faqs summary:hover { color: var(--accent); }
+
+.faqs details p,
+.faqs details ul {
+  margin: 0.75rem 0 0;
+  color: var(--text-dim);
+  animation: reveal 0.2s ease;
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
