@@ -1,16 +1,61 @@
 :root {
+  color-scheme: light;
+
   --bg: #ffffff;
   --bg-raised: #f7f7f5;
   --text: #191919;
   --text-dim: #6b6b6b;
   --accent: #2f5fce;
+  --accent-solid: #2f5fce;
+  --accent-solid-hover: #2851b4;
+  --on-accent: #ffffff;
   --border: #e3e3e0;
+  --header-bg: rgba(255, 255, 255, 0.82);
+  --control-hover: #efefec;
   --font: "Google Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 
   --wrap: 1080px;
   --measure: 44rem;
   --header-h: 68px;
   --section-y: clamp(4.5rem, 9vw, 8.5rem);
+}
+
+/* ---------- dark theme ----------
+   Follows the OS by default; [data-theme] is set by the header toggle
+   and wins over the OS preference in both directions. */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg: #0f1011;
+    --bg-raised: #17181a;
+    --text: #ededed;
+    --text-dim: #a1a1a8;
+    --accent: #8fb0ff;
+    --accent-solid: #3d6fe0;
+    --accent-solid-hover: #4f7dea;
+    --on-accent: #ffffff;
+    --border: #2a2b2e;
+    --header-bg: rgba(15, 16, 17, 0.82);
+    --control-hover: #202124;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0f1011;
+  --bg-raised: #17181a;
+  --text: #ededed;
+  --text-dim: #a1a1a8;
+  --accent: #8fb0ff;
+  --accent-solid: #3d6fe0;
+  --accent-solid-hover: #4f7dea;
+  --on-accent: #ffffff;
+  --border: #2a2b2e;
+  --header-bg: rgba(15, 16, 17, 0.82);
+  --control-hover: #202124;
 }
 
 * { box-sizing: border-box; }
@@ -59,7 +104,7 @@ img { max-width: 100%; }
   left: -9999px;
   top: 0;
   background: var(--text);
-  color: #fff;
+  color: var(--bg);
   padding: 0.75rem 1.25rem;
   border-radius: 0 0 8px 0;
   text-decoration: none;
@@ -80,7 +125,7 @@ img { max-width: 100%; }
   height: var(--header-h);
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.82);
+  background: var(--header-bg);
   backdrop-filter: saturate(180%) blur(12px);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid var(--border);
@@ -129,13 +174,69 @@ img { max-width: 100%; }
 }
 
 .site-nav .btn-sm {
-  color: #fff;
+  color: var(--on-accent);
 }
 
 @media (max-width: 640px) {
   .site-nav .nav-link { display: none; }
   .site-nav { gap: 1rem; }
 }
+
+/* ---------- theme toggle ---------- */
+
+.theme-toggle[hidden] { display: none; }
+
+.theme-toggle {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+  background: var(--control-hover);
+  border-color: var(--text-dim);
+}
+
+.theme-toggle svg {
+  width: 17px;
+  height: 17px;
+  display: block;
+}
+
+/* Show the icon for the theme the button switches *to*. */
+
+.theme-toggle .icon-sun { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+
+/* The logo is a fixed-colour bitmap, so swap in a light-on-dark variant. */
+
+.brand .logo-dark { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .brand .logo-light { display: none; }
+  :root:not([data-theme="light"]) .brand .logo-dark { display: block; }
+}
+
+:root[data-theme="dark"] .brand .logo-light { display: none; }
+:root[data-theme="dark"] .brand .logo-dark { display: block; }
 
 /* ---------- buttons ---------- */
 
@@ -153,8 +254,8 @@ img { max-width: 100%; }
 }
 
 .btn {
-  background: var(--accent);
-  color: #fff;
+  background: var(--accent-solid);
+  color: var(--on-accent);
   font-size: 1.02rem;
   padding: 0.9rem 2.1rem;
 }
@@ -162,7 +263,7 @@ img { max-width: 100%; }
 .btn:hover {
   opacity: 1;
   transform: translateY(-2px);
-  background: #2851b4;
+  background: var(--accent-solid-hover);
 }
 
 .btn-outline {
@@ -180,14 +281,14 @@ img { max-width: 100%; }
 }
 
 .btn-sm {
-  background: var(--accent);
+  background: var(--accent-solid);
   font-size: 0.9rem;
   padding: 0.5rem 1.15rem;
 }
 
 .btn-sm:hover {
   opacity: 1;
-  background: #2851b4;
+  background: var(--accent-solid-hover);
 }
 
 /* ---------- type ---------- */
